@@ -1,30 +1,43 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="nav">
+  <router-link to="/about">MENU</router-link><br>
   </div>
   <router-view/>
+
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
 
-#nav {
-  padding: 30px;
+@import "/scss/variables";
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  right: 1vw;
+  z-index: 1;
+  font-family: 'Oleo Script', cursive;
+  text-decoration: none;
+  color: $green;
+  font-size: 5vh;
 
   a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    text-decoration: none;
+    color: $green;
   }
+
 }
+
+
+
+router-view {
+  height: 100vh;
+  z-index: -1;
+}
+
 </style>
