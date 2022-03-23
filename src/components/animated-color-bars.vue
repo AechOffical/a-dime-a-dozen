@@ -17,7 +17,9 @@ import anime from "animejs/lib/anime.es.js";
 export default {
   name: "animated-color-bars",
   data: function () {
-
+    return{
+      boxHeight: 0.25 * window.innerHeight + 'px'
+    }
   },
   mounted: function () {
     anime({
@@ -45,55 +47,141 @@ export default {
       duration: 1000
     })
   },
+  created() {
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  methods: {
+    myEventHandler() {
+      this.boxHeight = window.innerHeight * 0.25 + 'px';
+      anime({
+        targets: '#light-beige',
+        translateY: 0.25 * window.innerHeight,
+        easing: 'linear',
+        duration: 1
+      })
+      anime({
+        targets: '#beige',
+        translateY: 0.5 * window.innerHeight,
+        easing: 'linear',
+        duration: 1
 
-}
+      })
+      anime({
+        targets: '#red',
+        translateY: 0.75 * window.innerHeight,
+        easing: 'linear',
+        duration: 1
+
+      })
+      anime({
+        targets: '#green',
+        translateY: window.innerHeight,
+        easing: 'linear',
+        duration: 1
+
+      })
+      return this.boxHeight;
+    }
+    }
+
+
+  }
 </script>
 
 <style scoped lang="scss">
 
 @import "../scss/variables";
 
-$height: 25vh;
+//$height: 25vh;
 $width: 50vw;
-
-#colorBars {
-  margin-top: -25vh;
-  display: flex;
-  flex-direction: column;
-
-
+@media screen and (max-width: 63em) {
+  #colorBars {
+    margin-top: -25vh;
+    display: flex;
+    flex-direction: column;}
+  .left {
+    display: none;
+  }
   #green {
     margin-top: -25vh;
     z-index: -3;
     background-color: $green;
-    width: $width;
-    height: $height;
-
+    width: 100vw;
+    //height: $height;
+    height: v-bind(boxHeight);
   }
   #red{
     margin-top: -25vh;
     z-index: -2;
     background-color: $red;
-    width: $width;
-    height: $height;
-
+    width: 100vw;
+    //height: $height;
+    height: v-bind(boxHeight);
 
   }
   #beige {
     margin-top: -25vh;
     z-index: -1;
     background-color: $beige;
-    width: $width;
-    height: $height;
-
+    width: 100vw;
+    //height: $height;
+    height: v-bind(boxHeight);
 
   }
   #light-beige {
     background-color: $light_beige;
-    width: $width;
-    height: $height;
-
+    width: 100vw;
+    //height: $height;
+    height: v-bind(boxHeight);
   }
+}
+@media screen and (min-width: 63.5em) {
+  #colorBars {
+    margin-top: -25vh;
+    display: flex;
+    flex-direction: column;
+
+
+    #green {
+      margin-top: -25vh;
+      z-index: -3;
+      background-color: $green;
+      width: $width;
+      //height: $height;
+      height: v-bind(boxHeight);
+    }
+    #red{
+      margin-top: -25vh;
+      z-index: -2;
+      background-color: $red;
+      width: $width;
+      //height: $height;
+      height: v-bind(boxHeight);
+
+    }
+    #beige {
+      margin-top: -25vh;
+      z-index: -1;
+      background-color: $beige;
+      width: $width;
+      //height: $height;
+      height: v-bind(boxHeight);
+
+    }
+    #light-beige {
+      background-color: $light_beige;
+      width: $width;
+      //height: $height;
+      height: v-bind(boxHeight);
+    }
+
+}
+
+
+
 
 
 }
